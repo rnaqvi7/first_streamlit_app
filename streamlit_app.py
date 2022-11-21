@@ -18,7 +18,7 @@ def get_fruit_load_list():
   
 def insert_row_snowflake(new_fruit):
   with my_cnx.cursor() as my_cur:
-    my_cur.execute("insert into pc_rivery_db.public.fruit_load_list values({fruit_choice})")
+    my_cur.execute(f"insert into pc_rivery_db.public.fruit_load_list values('{fruit_choice}')")
     return f"Thanks for adding {new_fruit}"
   
 streamlit.title('My Parents New Healthy Diner')
@@ -48,7 +48,7 @@ try:
 except URLError as e:
   streamlit.error()
 
-if streamlit.button('Get Fruit List'):
+if streamlit.button('View our Fruit List - Add your favorites!'):
   my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
   my_data_rows = get_fruit_load_list()
   my_cnx.close()
